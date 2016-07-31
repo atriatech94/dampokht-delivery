@@ -3132,11 +3132,14 @@ ons-input .text-input__container{
     padding: 0;
     background-color: transparent;
     direction: rtl;
+    display: block !important;
+    margin: 10px 0;
 }
 .order_peyk .order_lists{
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
+    display: flex !important;
 }
 .order_peyk .order_lists:last-child{
     margin-bottom: 0;

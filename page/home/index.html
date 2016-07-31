@@ -13,8 +13,8 @@
     <ons-page>
            <p ng-show="messages.length == 0" style="text-align:center; margin-top:30px;">سفارش جدیدی وجود ندارد </p>
          <ons-list>
-             <ons-list-item class="order_peyk">
-                 <ons-row class="order_lists" ng-repeat="orders in messages" ng-click="go('/order_detail/'+orders.id)">
+             <ons-list-item class="order_peyk"  ng-repeat="orders in messages" ng-click="go('/order_detail/'+orders.id)">
+                 <ons-row class="order_lists">
                      <ons-col width="5px"></ons-col>
                      <ons-col>
                             <div class="order_num">#{{orders.id}} - {{orders.date}}</div>

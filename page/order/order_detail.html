@@ -39,18 +39,26 @@
                     <ons-col>مبلغ کل سفارش :</ons-col>
                     <ons-col class="total" width="150px">{{order[0].total_price | currency : '' : 0 }} <i>تومان</i></ons-col>
                 </ons-row>
+            </ons-list-item>
+            <ons-list-item  id="checkout" modifier="tappable">
                 <ons-row>
                     <ons-col>مالیات بر ارزش افزوده :</ons-col>
                     <ons-col class="total" width="150px">{{order[0].tax | currency : '' : 0 }} <i>تومان</i></ons-col>
                 </ons-row>
+            </ons-list-item>
+            <ons-list-item  id="checkout" modifier="tappable"> 
                 <ons-row>
                     <ons-col>تخفیف :</ons-col>
                     <ons-col class="total" width="150px">{{order[0].discount | currency : '' : 0 }} <i>تومان</i></ons-col>
                 </ons-row>
+            </ons-list-item>
+            <ons-list-item  id="checkout" modifier="tappable">
                 <ons-row>
                     <ons-col>مبلغ قابل پرداخت  :</ons-col>
                     <ons-col class="total" width="150px">{{order[0].final_price | currency : '' : 0 }} <i>تومان</i></ons-col>
                 </ons-row>
+            </ons-list-item>
+            <ons-list-item  id="checkout" modifier="tappable">
                 <ons-row>
                     <ons-col>نوع پرداخت :</ons-col>
                     <ons-col class="total" width="150px" ng-if="order[0].payment_type == 0">استفاده از امتیاز</ons-col>
@@ -58,6 +66,8 @@
                     <ons-col class="total" width="150px" ng-if="order[0].payment_type == 2">پرداخت در محل</ons-col>
                     <ons-col class="total" width="150px" ng-if="order[0].payment_type == 3">پرداخت از اعتبار کاربری</ons-col>
                 </ons-row>
+            </ons-list-item>
+            <ons-list-item  id="checkout" modifier="tappable">
                  <ons-row>
                     <ons-col>وضعیت سفارش :</ons-col>
                     <ons-col class="total" width="150px" ng-if="order[0].order_status == 3">در انتظار تحویل</ons-col>

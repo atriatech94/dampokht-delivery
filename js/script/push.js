@@ -28,11 +28,7 @@ var app1 = {
         });
       
         push.on('notification', function(data) {
-            ons.notification.alert({
-                            title: data.title,
-                            buttonLabel:"بستن " ,
-                            message: data.message
-                    });
+           
         });
 
         push.on('error', function(e) {
