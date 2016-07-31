@@ -1,0 +1,11 @@
+<ons-page modifier="menu-page">
+    <div class="logo"><img src="img/logo.png"></div>
+    <ons-list var="myNavigator" class="menu-list">
+        <p ng-if="login" style="text-align:center; margin-bottom:10px">{{p_name}}</p>
+        <ons-list-item ng-if="!login"  class="menu-item" ng-click="menu.closeMenu();go('/login');"><ons-icon icon="fa-home"></ons-icon> ورود </ons-list-item>
+        <ons-list-item ng-if="login"   class="menu-item" ng-click="menu.closeMenu();go('/home');"><ons-icon icon="fa-home"></ons-icon> سفارش های جدید </ons-list-item>
+        <ons-list-item ng-if="login" class="menu-item" ng-click="menu.closeMenu();go('/order');"><ons-icon icon="fa-cutlery"></ons-icon> سفارش های گذشته </ons-list-item>
+        <ons-list-item ng-if="login"  class="menu-item" ng-click="menu.closeMenu();logOut();"><ons-icon icon="fa-cutlery"></ons-icon> برون رفت </ons-list-item>
+        <ons-list-item class="menu-item" ng-click="menu.closeMenu();exit();"><ons-icon icon="ion-power"></ons-icon> خروج </ons-list-item>
+    </ons-list>
+</ons-page> 

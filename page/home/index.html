@@ -1,0 +1,35 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">سفارش های در انتظار تحویل</div>
+        <div class="right">
+             <ons-toolbar-button ng-click="refresh()" modifier="material"><ons-icon icon="ion-android-sync"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page>
+           <p ng-show="messages.length == 0" style="text-align:center; margin-top:30px;">سفارش جدیدی وجود ندارد </p>
+         <ons-list>
+             <ons-list-item class="order_peyk">
+                 <ons-row class="order_lists" ng-repeat="orders in messages" ng-click="go('/order_detail/'+orders.id)">
+                     <ons-col width="5px"></ons-col>
+                     <ons-col>
+                            <div class="order_num">#{{orders.id}} - {{orders.date}}</div>
+                            <div class="order_desc"> {{orders.name}} - تلفن : {{orders.phone}}</div>
+                            <div class="order_address"> قیمت قابل پرداخت : {{orders.final_price | currency : '' : 0 }} تومان</div>
+                            <div class="order_desc" ng-if="orders.payment_type == 0" > استفاده از امتیاز</div>
+                            <div class="order_desc" ng-if="orders.payment_type == 1" >پرداخت آنلاین</div>
+                            <div style="color:red;" class="order_desc" ng-if="orders.payment_type == 2" >پرداخت در محل</div>
+                            <div class="order_desc" ng-if="orders.payment_type == 3" >پرداخت از اعتبار کاربری</div>
+                            <div class="order_address"> آدرس : {{orders.address}}</div>
+                     </ons-col>
+                     <ons-col width="20px"><i class="fa fa-chevron-left"></i></ons-col>
+                 </ons-row>
+             </ons-list-item>
+         </ons-list>
+         <ons-button ng-show="loaded" ng-click="load_more()" modifier="large--quiet">بارگذاری بقیه سفارش ها</ons-button>
+    </ons-page>
+</ons-template>

@@ -1,0 +1,22 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">ورود به سامانه</div>
+     </ons-toolbar>
+    <ons-page>
+        <div class="login_form">
+            <div class="form-row"><ons-input  id="username" type="text" placeholder="نام کاربری" modifier="underbar" style="width:100%" float></ons-input></div>
+            <div class="form-row"><ons-input  id="password" type="password" placeholder="رمز عبور" modifier="underbar"  style="width:100%" float></ons-input></div>
+            <br>
+            <ons-button ng-click="submit()" modifier="material">ورود</ons-button>
+            <br><br>
+            <ons-button modifier="quiet" class="forgot-password"> <a>نام کاربری و کلمه عبور خود را از مدیریت دریافت کنید </a></ons-button>
+            
+        </div>
+
+    </ons-page>
+</ons-template>

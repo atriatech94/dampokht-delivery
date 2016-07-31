@@ -1,0 +1,88 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html" >
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">سفارش {{order[0].id}}#</div>
+        <div class="right">
+             <ons-toolbar-button ng-if="order[0].order_status==3" ng-click="go('/home')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+             <ons-toolbar-button ng-if="order[0].order_status!=3" ng-click="go('/order')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page class="checkout">
+        <!--=============================================-->
+        <div class="user-info">
+            <p class="name"><i class="fa fa-user" aria-hidden="true"></i>   {{order[0].name}} </p>
+            <p class="address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{address[0].address}}   <span ng-if="address[0].zip_code"> - کد پستی : {{address[0].zip_code}} </span></p>
+            
+            <p class="phone"><i class="fa fa-phone" aria-hidden="true"></i> {{order[0].phone}} </p>
+        </div>
+        <ons-list class="checkout-bill">
+            <ons-list-header class="rtl"> جزئیات سفارش : </ons-list-header>
+            
+            <ons-list-item  id="checkout" modifier="tappable" ng-repeat="food in order_detail">
+                <ons-row>
+                    <ons-col>{{ food.name }}</ons-col>
+                    <ons-col width="40px">{{ food.quantity }}</ons-col>
+                    <ons-col class="total" width="100px">{{food.quantity * food.price | currency : '' : 0 }} <i>تومان</i></ons-col>
+                </ons-row>
+            </ons-list-item>
+        </ons-list>
+
+        <ons-list class="checkout-bill">
+            <ons-list-header class="rtl"> جزئیات فاکتور : </ons-list-header>
+            
+            <ons-list-item  id="checkout" modifier="tappable">
+                <ons-row>
+                    <ons-col>مبلغ کل سفارش :</ons-col>
+                    <ons-col class="total" width="150px">{{order[0].total_price | currency : '' : 0 }} <i>تومان</i></ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col>مالیات بر ارزش افزوده :</ons-col>
+                    <ons-col class="total" width="150px">{{order[0].tax | currency : '' : 0 }} <i>تومان</i></ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col>تخفیف :</ons-col>
+                    <ons-col class="total" width="150px">{{order[0].discount | currency : '' : 0 }} <i>تومان</i></ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col>مبلغ قابل پرداخت  :</ons-col>
+                    <ons-col class="total" width="150px">{{order[0].final_price | currency : '' : 0 }} <i>تومان</i></ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col>نوع پرداخت :</ons-col>
+                    <ons-col class="total" width="150px" ng-if="order[0].payment_type == 0">استفاده از امتیاز</ons-col>
+                    <ons-col class="total" width="150px" ng-if="order[0].payment_type == 1">پرداخت آنلاین</ons-col>
+                    <ons-col class="total" width="150px" ng-if="order[0].payment_type == 2">پرداخت در محل</ons-col>
+                    <ons-col class="total" width="150px" ng-if="order[0].payment_type == 3">پرداخت از اعتبار کاربری</ons-col>
+                </ons-row>
+                 <ons-row>
+                    <ons-col>وضعیت سفارش :</ons-col>
+                    <ons-col class="total" width="150px" ng-if="order[0].order_status == 3">در انتظار تحویل</ons-col>
+                    <ons-col class="total" width="150px" ng-if="order[0].order_status == 4">تحویل داده شده</ons-col>
+                    <ons-col class="total" width="150px" ng-if="order[0].order_status == 5">رد شده</ons-col>
+                </ons-row>
+            </ons-list-item>
+        </ons-list>
+        <div ng-if="order[0].order_status==3" class="btns">
+            <ons-button  ng-click="accept(order[0].id)" class="btn-green" modifier="large">تحویل سفارش</ons-button>
+            <ons-button ng-click="showDialog('dialog-1')" class="btn-red" modifier="large">رد سفارش</ons-button>
+        </div>
+          <div ng-if="address[0].type == '2'" class="show_gmap">
+            <div id="submit-map" lat="{{address[0].lat}}" long="{{address[0].lon}}" class="googleMap" style="height:300px"></div>
+        </div>
+    </ons-page>
+
+      <ons-alert-dialog id="dialog-1">
+        <div class="alert-dialog-title">رد سفارش</div>
+        <div class="alert-dialog-content">
+            <textarea class="tiket_answer_text" id="text_a" name="text" placeholder=" دلیل رد سفارش را بنویسید ."></textarea>
+        </div>
+        <div class="alert-dialog-footer">
+            <button class="alert-dialog-button" ng-click="hideDialog('dialog-1')">لغو</button>
+            <button class="alert-dialog-button" ng-click="send_answer('dialog-1')">ثبت</button>
+        </div>
+    </ons-alert-dialog>
+</ons-template>
